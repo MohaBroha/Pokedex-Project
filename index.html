@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Podex</title>
-    <script src="script.js"></script>
+    <link rel="icon" href="./img/ChatGPT Image 5. Nov. 2025, 11_17_15.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,13 +13,7 @@
 
     <header id="main-header">
         <h1>Podex</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Start</a></li>
-                <li><a href="#gallery">Galerie</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
+        <input type="text" id="search-input" placeholder="Suche Pokémon (erste 3 Buchstaben)" oninput="filterPokemon()">
     </header>
 
     <div id="pokemon-container"></div>
@@ -28,7 +22,7 @@
     <footer id="site-footer">
         <p>© 2025 Podex — Alle Rechte vorbehalten.</p>
     </footer>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
