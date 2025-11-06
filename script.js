@@ -2,6 +2,7 @@ const modalContainer = document.getElementById('modal-container');
 const pokemonContainer = document.getElementById('pokemon-container');
 let results = [];
 
+
 function init() {
     loadPokemon();
 }
@@ -31,16 +32,26 @@ function renderPokemon(pokemonList) {
 
 
 function filterPokemon() {
-
+    const query = document.getElementById('search-input').value.toLowerCase().slice(0, 3);
+    let filtered = [];
+    for (let i = 0; i < results.length; i++) {
+        if (results[i].name.toLowerCase().startsWith(query)) {
+            filtered.push(results[i]);
+        }
+    }
+    renderPokemon(filtered);
 }
 
 
-function showModal(name, img) {
+function showModal() {
 
 }
 
 function closeModal() {
 
 }
+
+
+
 
 init();
