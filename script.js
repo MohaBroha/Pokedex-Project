@@ -6,25 +6,38 @@ let results = [];
 function init() {
     loadPokemon();
 }
-
 async function loadPokemon() {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
     results = (await response.json()).results;
     renderPokemon(results);
 }
 
-function renderPokemon(pokemonList) {
+async function getPokemonDetails(pokemon) {
+    const response = await fetch(pokemon.url);
+    const data = await response.json();
+    return {
+        name: pokemon.name,
+        id: data.id,
+        types: data.types.map(t => t.type.name),
+        img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`
+    };
+}
+
+async function renderPokemon(pokemonList) {
     let html = '';
     for (let i = 0; i < pokemonList.length; i++) {
-        const pokemon = pokemonList[i];
-        const id = pokemon.url.split('/').filter(Boolean).pop();
-        const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
+        const details = await getPokemonDetails(pokemonList[i]);
         html += `
-            <div class="pokemon-card" onclick="showModal('${pokemon.name}', '${img}')">
-                <img src="${img}" alt="${pokemon.name}" />
-                <p>${pokemon.name}</p>
-            </div>
+          <div class="pokemon-card" onclick="showModal('${details.name}', '${details.img}')">
+    <img src="${details.img}" alt="${details.name}" />
+    <div class="pokemon-info">
+        <div class="pokemon-top">
+            <span class="pokemon-types">${details.types.join(', ')}</span>
+            <span class="pokemon-id">ID: ${details.id}</span>
+        </div>
+        <p class="pokemon-name">${details.name.toUpperCase()}</p>
+    </div>
+</div>
         `;
     }
     pokemonContainer.innerHTML = html;
@@ -43,14 +56,14 @@ function filterPokemon() {
 }
 
 
-function showModal() {
+function showModal(name, img) {
 
 }
 
 function closeModal() {
-
+    modalContainer.innerHTML = '';
+    modalContainer.className = '';
 }
-
 
 
 
