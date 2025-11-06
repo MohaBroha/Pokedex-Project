@@ -6,7 +6,7 @@
 
 html,
 body {
-    /* optional entfernen, falls nicht benötigt */
+
     height: 100%;
     font-family: Arial, sans-serif;
 }
@@ -22,7 +22,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* flex-direction: center;  <-- entfernt (ungültig) */
     padding: 10px 8px;
 }
 
@@ -52,7 +51,7 @@ body {
     align-items: flex-start;
     max-width: 1200px;
     background: white;
-    /* Semikolon ergänzt */
+
 }
 
 .pokemon-card {
@@ -80,7 +79,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* display: block;  <-- optional entfernen */
+
 }
 
 .pokemon-info {
@@ -117,47 +116,6 @@ body {
     border-radius: 4px;
 }
 
-#modal-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-#modal-container.active {
-    display: block;
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-
-.modal button {
-    margin-top: 15px;
-    padding: 8px 16px;
-    border: none;
-    background: #2a75bb;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.modal button:hover {
-    background: #1a4f80;
-}
 
 #site-footer {
     background-color: #062847;
@@ -168,7 +126,7 @@ body {
 
 @media (max-width: 530px) {
     #main-header {
-        /* nur abweichende Werte setzen — rest bleibt aus der Basisregel */
+
         justify-content: center;
         flex-direction: column;
     }
