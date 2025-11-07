@@ -1,7 +1,7 @@
-Podex – Simple Pokémon Pokédex
+DexHub – Simple Pokémon Pokédex
 Overview
 
-Podex is an interactive web-based Pokédex that fetches and displays Pokémon data from the PokéAPI. 
+DexHub is an interactive web-based DexHub that fetches and displays Pokémon data from the PokéAPI. 
 Users can click on a Pokémon to view a modal with details.
 
 Built with HTML, CSS, and JavaScript – no frameworks required.
