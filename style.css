@@ -17,7 +17,7 @@ body {
 }
 
 #main-header {
-    background-color: #062847;
+    background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
     color: white;
     display: flex;
     align-items: center;
@@ -49,9 +49,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    max-width: 1200px;
-    background: white;
-
+    background: linear-gradient(180deg, #04041a 0%, #086b76 100%);
 }
 
 .pokemon-card {
@@ -63,8 +61,8 @@ body {
     cursor: pointer;
     border-radius: 10px;
     background: #ffcb05;
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 160px;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -76,10 +74,9 @@ body {
 }
 
 .pokemon-card img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 120px;
     object-fit: cover;
-
 }
 
 .pokemon-info {
@@ -89,36 +86,148 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 6px;
+    pointer-events: none;
 }
 
-.pokemon-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.pokemon-types,
-.pokemon-id {
-    background: rgba(255, 255, 255, 0.8);
+.pokemon-types {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(255, 255, 255, 0.85);
     color: #2a75bb;
     padding: 2px 5px;
-    border-radius: 4px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.pokemon-id {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #2a75bb;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: right;
 }
 
 .pokemon-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
     color: #2a75bb;
     font-weight: bold;
     font-size: 14px;
     padding: 3px 0;
-    border-radius: 4px;
+}
+
+#modal-container.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 
+.modal {
+    background: linear-gradient(180deg, #ffcb05 0%, #040960 100%);
+    border: 3px solid #2a75bb;
+    border-radius: 16px;
+    width: 320px;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    animation: popIn 0.3s ease;
+}
+
+
+.modal-content img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin: 10px 0;
+}
+
+.modal-content {
+    background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-content:hover {
+    transform: translateY(-5px);
+}
+
+
+.modal h2 {
+    color: #2a75bb;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+
+.modal p {
+    color: #062847;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+.modal button {
+    background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
+    color: rgb(13, 62, 16);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.modal button:hover {
+    background: #052345;
+    transform: scale(1.05);
+}
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#pokemonChart {
+    margin: 15px 0;
+    max-width: 100%;
+    height: 200px;
+}
+
+
+.modal-details {
+    font-size: 16px;
+    background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
+    margin-bottom: 15px;
+}
+
 #site-footer {
-    background-color: #062847;
+    background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
     color: white;
     text-align: center;
     padding: 15px 0;
