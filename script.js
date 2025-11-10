@@ -70,7 +70,6 @@ function showModal(name, img) {
 }
 
 async function showModalWithStats(name, img, url) {
-    // Details inkl. Stats von der API laden
     const response = await fetch(url);
     const data = await response.json();
     const stats = data.stats.map(stat => ({
@@ -78,23 +77,19 @@ async function showModalWithStats(name, img, url) {
         value: stat.base_stat
     }));
 
-    // Modal-Inhalt mit Chart
+
     modalContainer.innerHTML = `
         <div class="modal-backdrop" onclick="closeModal()">
             <div class="modal-content" onclick="event.stopPropagation()">
                 <h2>${name.toUpperCase()}</h2>
                 <img src="${img}" alt="${name}" />
-                
-
                 <canvas id="pokemonChart" width="300" height="200"></canvas>
-
                 <button onclick="closeModal()">Schließen</button>
             </div>
         </div>
     `;
     document.body.classList.add('modal-open');
 
-    // Chart erstellen
     const ctx = document.getElementById('pokemonChart');
     new Chart(ctx, {
         type: 'bar',
@@ -139,14 +134,11 @@ async function showModalWithStats(name, img, url) {
 }
 
 
-
-
 function closeModal() {
     modalContainer.innerHTML = '';
     modalContainer.className = '';
 
 }
-
 
 
 init();
