@@ -1,6 +1,8 @@
 const modalContainer = document.getElementById('modal-container');
 const pokemonContainer = document.getElementById('pokemon-container');
 let results = [];
+let currentIndex = 0;
+
 
 
 function init() {
@@ -80,11 +82,19 @@ async function showModalWithStats(name, img, url) {
 
     modalContainer.innerHTML = `
         <div class="modal-backdrop" onclick="closeModal()">
-            <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-content">
+                
+                <button class="close-btn" onclick="closeModal()">✖</button>
+
                 <h2>${name.toUpperCase()}</h2>
                 <img src="${img}" alt="${name}" />
-                <canvas id="pokemonChart" width="300" height="200"></canvas>
-                <button onclick="closeModal()">Schließen</button>
+                <canvas id="pokemonChart"></canvas>
+
+                
+                <div class="nav-btns">
+                    <button onclick="prevPokemon()">⬅</button>
+                    <button onclick="nextPokemon()">➡</button>
+                </div>
             </div>
         </div>
     `;
@@ -140,5 +150,22 @@ function closeModal() {
 
 }
 
+function nextPokemon() {
+    currentIndex++;
+    if (currentIndex >= results.length) currentIndex = 0;
+
+    const p = results[currentIndex];
+    const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex + 1}.png`;
+    showModalWithStats(p.name, img, p.url);
+}
+
+function prevPokemon() {
+    currentIndex--;
+    if (currentIndex < 0) currentIndex = results.length - 1;
+
+    const p = results[currentIndex];
+    const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex + 1}.png`;
+    showModalWithStats(p.name, img, p.url);
+}
 
 init();
