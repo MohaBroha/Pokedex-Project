@@ -8,10 +8,13 @@
     <link rel="icon" href="./img/ChatGPT Image 5. Nov. 2025, 11_17_15.png">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
-<body>
+<body onkeydown="
+    if(event.key==='ArrowLeft'){ prevPokemon(); }
+    else if(event.key==='ArrowRight'){ nextPokemon(); }
+    else if(event.key==='Escape'){ closeModal(); }
+">
 
     <header id="main-header">
         <h1>DexHub</h1>
@@ -22,9 +25,11 @@
     <div id="pokemon-container"></div>
     <div id="modal-container"></div>
 
+
     <footer id="site-footer">
         <p>© 2025 Podex — Alle Rechte vorbehalten.</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 
