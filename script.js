@@ -1,17 +1,31 @@
 const modalContainer = document.getElementById('modal-container');
 const pokemonContainer = document.getElementById('pokemon-container');
 let results = [];
+let allPokemon = [];
 let currentIndex = 0;
-
-
+let visibleCount = 20;
 
 function init() {
     loadPokemon();
 }
+
 async function loadPokemon() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
-    results = (await response.json()).results;
-    renderPokemon(results);
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200');
+    const data = await response.json();
+    results = data.results;
+
+    for (let i = 0; i < results.length; i++) {
+        const details = await getPokemonDetails(results[i]);
+        allPokemon.push({
+            id: details.id,
+            name: details.name,
+            type: details.types.join(', '),
+            image: details.img,
+            url: results[i].url
+        });
+    }
+
+    displayPokemon();
 }
 
 async function getPokemonDetails(pokemon) {
@@ -28,47 +42,19 @@ async function getPokemonDetails(pokemon) {
 async function renderPokemon(pokemonList) {
     let html = '';
     for (let i = 0; i < pokemonList.length; i++) {
-        const details = await getPokemonDetails(pokemonList[i]);
-        html += `
-            <div class="pokemon-card" onclick="showModalWithStats('${details.name}', '${details.img}', '${pokemonList[i].url}')">
-                <img src="${details.img}" alt="${details.name}" />
-                <div class="pokemon-info">
-                    <p class="pokemon-name">${details.name.toUpperCase()}</p>
-                    <p class="pokemon-types">${details.types.join(', ')}</p>
-                    <p class="pokemon-id">ID: ${details.id}</p>
-                </div>
-            </div>
-        `;
+        html += pokemonCard(pokemonList[i]);
     }
     pokemonContainer.innerHTML = html;
 }
 
-
 function filterPokemon() {
-    const query = document.getElementById('search-input').value.toLowerCase().slice(0, 3);
-    let filtered = [];
-    for (let i = 0; i < results.length; i++) {
-        if (results[i].name.toLowerCase().startsWith(query)) {
-            filtered.push(results[i]);
-        }
-    }
+    const query = document.getElementById('search-input').value.toLowerCase();
+    if (query.length < 3)
+        return;
+
+    let filtered = allPokemon.filter(p => p.name.toLowerCase().startsWith(query));
+
     renderPokemon(filtered);
-}
-
-
-function showModal(name, img) {
-    modalContainer.innerHTML = `
-        <div class="modal-backdrop" onclick="closeModal()">
-            <div class="modal-content">
-                <h2>${name.toUpperCase()}</h2>
-                <img src="${img}" alt="${name}" />
-                 <p class="pokemon-types">${details.types.join(', ')}</p>
-                    <p class="pokemon-id">ID: ${details.id}</p>
-                <button onclick="closeModal()">Schließen</button>
-            </div>
-        </div>
-    `;
-
 }
 
 async function showModalWithStats(name, img, url) {
@@ -79,81 +65,40 @@ async function showModalWithStats(name, img, url) {
         value: stat.base_stat
     }));
 
-
-    modalContainer.innerHTML = `
-        <div class="modal-backdrop" onclick="closeModal()">
-            <div class="modal-content">
-                
-                <button class="close-btn" onclick="closeModal()">✖</button>
-
-                <h2>${name.toUpperCase()}</h2>
-                <img src="${img}" alt="${name}" />
-                <canvas id="pokemonChart"></canvas>
-
-                
-                <div class="nav-btns">
-                    <button onclick="prevPokemon()">⬅</button>
-                    <button onclick="nextPokemon()">➡</button>
-                </div>
-            </div>
-        </div>
-    `;
+    modalContainer.innerHTML = modalTemplate(name, img);
     document.body.classList.add('modal-open');
-
-    const ctx = document.getElementById('pokemonChart');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: stats.map(s => s.name.toUpperCase()),
-            datasets: [{
-                label: 'Base Stats',
-                data: stats.map(s => s.value),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 10 }
-                }
-            },
-            plugins: {
-                legend: { display: false }
-            }
-        }
-    });
-
+    renderStatsChart('pokemonChart', stats);
 }
 
+function displayPokemon() {
+    const container = document.getElementById('pokemon-container');
+    container.innerHTML = '';
+
+    for (let i = 0; i < visibleCount && i < allPokemon.length; i++) {
+        const p = allPokemon[i];
+        container.innerHTML += pokemonCardTemplate(p);
+    }
+}
+
+function loadMorePokemon() {
+    const btn = document.getElementById('load-more-btn');
+    btn.innerHTML = spinnerTemplate();
+
+    setTimeout(() => {
+        visibleCount += 20;
+        displayPokemon();
+        btn.innerHTML = 'Mehr laden';
+    }, 1000);
+}
 
 function closeModal() {
     modalContainer.innerHTML = '';
     modalContainer.className = '';
-
 }
 
 function nextPokemon() {
     currentIndex++;
     if (currentIndex >= results.length) currentIndex = 0;
-
     const p = results[currentIndex];
     const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex + 1}.png`;
     showModalWithStats(p.name, img, p.url);
@@ -162,7 +107,6 @@ function nextPokemon() {
 function prevPokemon() {
     currentIndex--;
     if (currentIndex < 0) currentIndex = results.length - 1;
-
     const p = results[currentIndex];
     const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex + 1}.png`;
     showModalWithStats(p.name, img, p.url);
