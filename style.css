@@ -66,6 +66,7 @@ main {
 }
 
 .pokemon-card {
+
     position: relative;
     display: flex;
     align-items: center;
@@ -305,6 +306,7 @@ h2 {
 }
 
 .spinner {
+    border-radius: 999px;
     width: 24px;
     height: 24px;
     animation: spin 1s linear infinite;

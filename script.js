@@ -68,6 +68,7 @@ async function showModalWithStats(name, img, url) {
     modalContainer.innerHTML = modalTemplate(name, img);
     document.body.classList.add('modal-open');
     renderStatsChart('pokemonChart', stats);
+    currentIndex = data.id - 1;
 }
 
 function displayPokemon() {
@@ -87,7 +88,7 @@ function loadMorePokemon() {
     setTimeout(() => {
         visibleCount += 20;
         displayPokemon();
-        btn.innerHTML = 'Mehr laden';
+        btn.innerHTML = 'Load More';
     }, 1000);
 }
 
