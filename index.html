@@ -17,19 +17,27 @@
 ">
 
     <header id="main-header">
-        <h1>DexHub</h1>
-        <input type="text" id="search-input" placeholder="Suche Pokémon" oninput="filterPokemon()">
+        <a href="index.html" aria-label="Zur Startseite">
+            <h1>DexHub</h1>
+        </a>
+        <input type="text" id="search-input" placeholder="Suche Pokémon" oninput="filterPokemon()"
+            aria-label="Pokémon suchen">
     </header>
 
+    <main class="myMain" role="main">
+        <div id="pokemon-container" aria-live="polite" aria-label="Liste der Pokémon"></div>
+        <div id="modal-container" aria-hidden="true"></div>
 
-    <div id="pokemon-container"></div>
-    <div id="modal-container"></div>
-
+        <div id="load-more-wrap">
+            <button id="load-more-btn" onclick="loadMorePokemon()" aria-label="Mehr Pokémon laden">Mehr laden</button>
+        </div>
+    </main>
 
     <footer id="site-footer">
-        <p>© 2025 Podex — Alle Rechte vorbehalten.</p>
+        <p>© 2025 DexHub — Alle Rechte vorbehalten.</p>
     </footer>
 
+    <script src="templates.js"></script>
     <script src="script.js"></script>
 </body>
 
