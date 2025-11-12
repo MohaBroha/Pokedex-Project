@@ -18,10 +18,20 @@ body {
     background: linear-gradient(180deg, #04041a 0%, #086b76 100%);
 }
 
+#main-header,
+main,
+#site-footer {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 20px;
 }
 
 #main-header {
@@ -66,7 +76,6 @@ main {
 }
 
 .pokemon-card {
-
     position: relative;
     display: flex;
     align-items: center;
@@ -79,6 +88,7 @@ main {
     height: 240px;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    flex: 0 0 auto;
 }
 
 .pokemon-card:hover {
@@ -104,39 +114,81 @@ main {
     pointer-events: none;
 }
 
-.pokemon-types {
+.pokemon-types,
+.pokemon-id,
+.pokemon-name {
     position: absolute;
-    top: 6px;
-    right: 6px;
-    color: linear-gradient(180deg, #0f5821 0%, #020739 100%);
     padding: 2px 5px;
     border-radius: 2px;
     font-weight: bold;
+}
+
+.pokemon-types {
+    top: 6px;
+    right: 6px;
     font-size: 14px;
 }
 
 .pokemon-id {
-    position: absolute;
     top: 6px;
     left: 6px;
-    color: linear-gradient(180deg, #0f5821 0%, #020739 100%);
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-weight: bold;
     font-size: 12px;
     text-align: right;
 }
 
 .pokemon-name {
-    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    text-align: center;
-    color: linear-gradient(180deg, #0fc93d 0%, #020739 100%);
-    font-weight: bold;
     font-size: 14px;
-    padding: 3px 0;
+    text-align: center;
+}
+
+.pokemon-card.placeholder {
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 160px;
+    margin: 15px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pokemon-card .loader-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.9;
+    animation: loader 0.9s infinite ease-in-out;
+}
+
+.pokemon-card .loader-dot:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.pokemon-card .loader-dot:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.spinner {
+    border-radius: 999px;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #modal-container.active {
@@ -156,7 +208,8 @@ h2 {
     background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
     padding: 2rem;
     border-radius: 1.5rem;
-    max-width: 420px;
+    width: 380px;
+    max-width: 90%;
     text-align: center;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -185,8 +238,8 @@ h2 {
 }
 
 .modal button:hover {
-    background: #052345;
     transform: scale(1.05);
+    background: #052345;
 }
 
 .modal-backdrop {
@@ -275,53 +328,6 @@ h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.pokemon-card.placeholder {
-    background: rgba(255, 255, 255, 0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 120px;
-    height: 160px;
-    margin: 15px;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-.pokemon-card .loader-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #fff;
-    opacity: 0.9;
-    animation: loader 0.9s infinite ease-in-out;
-}
-
-.pokemon-card .loader-dot:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.pokemon-card .loader-dot:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-.spinner {
-    border-radius: 999px;
-    width: 24px;
-    height: 24px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 #site-footer {
     background: linear-gradient(180deg, #0f5821 0%, #020739 100%);
     color: white;
@@ -333,5 +339,22 @@ h2 {
     #main-header {
         justify-content: center;
         flex-direction: column;
+    }
+}
+
+@media (max-width: 320px) {
+    .dialog {
+        padding: 24px;
+    }
+}
+
+
+@media (min-width: 3440px) {
+
+    #main-header,
+    main,
+    #site-footer {
+        max-width: 1900px;
+        padding: 0 40px;
     }
 }
