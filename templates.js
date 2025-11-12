@@ -40,6 +40,13 @@ function modalTemplate(name, img) {
         </div>
     `;
 }
+function loadMoreButtonTemplate() {
+    return `<button id="load-more-btn" class="load-more-btn" onclick="loadMorePokemon()">Load More</button>`;
+}
+
+function backButtonTemplate() {
+    return `<button id="back-btn" class="load-more-btn" onclick="resetSearch()">Back</button>`;
+}
 
 function spinnerTemplate() {
     return `
@@ -82,6 +89,13 @@ function renderStatsChart(canvasId, stats) {
                 y: {
                     beginAtZero: true,
                     ticks: { stepSize: 10 }
+                },
+                x: {
+                    ticks: {
+                        callback: function (val) {
+                            return window.innerWidth < 410 ? '' : this.getLabelForValue(val);
+                        }
+                    }
                 }
             },
             plugins: {
@@ -90,3 +104,5 @@ function renderStatsChart(canvasId, stats) {
         }
     });
 }
+
+
