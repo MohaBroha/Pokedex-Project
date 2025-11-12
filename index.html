@@ -10,11 +10,7 @@
 
 </head>
 
-<body onkeydown="
-    if(event.key==='ArrowLeft'){ prevPokemon(); }
-    else if(event.key==='ArrowRight'){ nextPokemon(); }
-    else if(event.key==='Escape'){ closeModal(); }
-">
+<body onload="initKeyboardControls()">
 
     <header id="main-header">
         <a href="index.html" aria-label="Zur Startseite">
