@@ -27,11 +27,14 @@ main,
     box-sizing: border-box;
 }
 
+#dexhub-link {
+    cursor: pointer;
+}
+
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
 }
 
 #main-header {
@@ -41,11 +44,6 @@ main {
     align-items: center;
     justify-content: space-between;
     padding: 10px 8px;
-}
-
-#main-header a {
-    text-decoration: none;
-    color: inherit;
 }
 
 #search-input {
@@ -155,23 +153,6 @@ main {
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-}
-
-.pokemon-card .loader-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #fff;
-    opacity: 0.9;
-    animation: loader 0.9s infinite ease-in-out;
-}
-
-.pokemon-card .loader-dot:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.pokemon-card .loader-dot:nth-child(3) {
-    animation-delay: 0.3s;
 }
 
 .spinner {
@@ -313,7 +294,8 @@ h2 {
     padding: 12px 0;
 }
 
-#load-more-btn {
+#load-more-btn,
+#back-btn {
     padding: 8px 38px;
     border-radius: 32px;
     border: none;
@@ -323,7 +305,8 @@ h2 {
     font-weight: bold;
 }
 
-#load-more-btn:hover {
+#load-more-btn:hover,
+#back-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
@@ -347,7 +330,6 @@ h2 {
         padding: 24px;
     }
 }
-
 
 @media (min-width: 3440px) {
 
