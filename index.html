@@ -7,15 +7,12 @@
     <title>DexHub</title>
     <link rel="icon" href="./img/ChatGPT Image 5. Nov. 2025, 11_17_15.png">
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body onload="initKeyboardControls()">
 
     <header id="main-header">
-        <a href="index.html" aria-label="Zur Startseite">
-            <h1>DexHub</h1>
-        </a>
+        <h1 onclick="goHome()" id="dexhub-link">DexHub</h1>
         <input type="text" id="search-input" placeholder="Suche Pokémon" oninput="filterPokemon()"
             aria-label="Pokémon suchen">
     </header>
