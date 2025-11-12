@@ -7,13 +7,15 @@ let results = [];
 let allPokemon = [];
 let currentIndex = 0;
 let visibleCount = 20;
+let loadLimit = 20;
+let offset = 0;
 
 function init() {
     loadPokemon();
 }
 
 async function loadPokemon() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200');
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${loadLimit}&offset=${offset}`);
     const data = await response.json();
     results = data.results;
 
@@ -27,7 +29,7 @@ async function loadPokemon() {
             url: results[i].url
         });
     }
-
+    offset = offset + 20;
     displayPokemon();
 }
 
@@ -111,6 +113,7 @@ function loadMorePokemon() {
         displayPokemon();
         btn.innerHTML = 'Load More';
     }, 1000);
+    loadPokemon()
 }
 
 function closeModal() {
