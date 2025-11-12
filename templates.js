@@ -41,7 +41,7 @@ function modalTemplate(name, img) {
     `;
 }
 function loadMoreButtonTemplate() {
-    return `<button id="load-more-btn" class="load-more-btn" onclick="loadMorePokemon()">Load More</button>`;
+    return `<button id="load-more-btn" class="load-more-btn" onclick="loadPokemon()">Load More</button>`;
 }
 
 function backButtonTemplate() {
