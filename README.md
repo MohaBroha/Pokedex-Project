@@ -1,24 +1,89 @@
-DexHub – Simple Pokémon Pokédex
-Overview
+# 📘 DexHub – Pokédex Web App
 
-DexHub is an interactive web-based DexHub that fetches and displays Pokémon data from the PokéAPI. 
-Users can click on a Pokémon to view a modal with details.
+A modern Pokédex web application built with vanilla JavaScript. DexHub allows users to browse, search, and inspect Pokémon with a clean, responsive and modern UI.
 
-Built with HTML, CSS, and JavaScript – no frameworks required.
+---
 
-Features
+## 🚀 Live Demo
+👉 https://your-live-demo-link.com
 
-Displays the first 20 Pokémon with names (can be expanded)
-Clickable Pokémon cards open a modal with details
-Responsive layout using CSS
-Easy to extend with Pokémon images or more data
+---
 
-Technologies
+## ✨ Features
 
-HTML5
-CSS3 (Flexbox)
-JavaScript (Fetch API, DOM Manipulation)
-PokéAPI (https://pokeapi.co)
+- 🔎 Search Pokémon by name
+- 📦 Load more / infinite scroll functionality
+- 📱 Fully responsive design (mobile, tablet, desktop)
+- 🎴 Dynamic Pokémon cards with images and stats
+- 🪟 Modal detail view with extended Pokémon information
+- 🎨 Modern dark UI with gradients
+- ⚡ Fast API-based rendering using PokéAPI
 
-License
-MIT License
+---
+
+## 🛠️ Tech Stack
+
+- HTML5
+- CSS3 (Flexbox, Grid, Media Queries)
+- JavaScript (ES6+)
+- PokéAPI (https://pokeapi.co/)
+
+---
+
+## 📂 Project Structure
+
+Pokedex-Project/
+│
+├── index.html
+├── style.css
+├── script.js
+└── assets/
+
+---
+
+## 📱 Responsive Design
+
+DexHub is optimized for all devices:
+
+- 💻 Desktop (1200px+)
+- 📟 Tablet (768px)
+- 📱 Mobile (480px and below)
+
+---
+
+## 📸 Preview
+
+![DexHub Preview](./assets/preview.png)
+
+---
+
+## 🧠 What I Learned
+
+- Working with REST APIs (PokéAPI)
+- DOM manipulation with JavaScript
+- Responsive UI design
+- State handling in vanilla JS
+- Modal system & dynamic rendering
+
+---
+
+## 📌 Future Improvements
+
+- ❤️ Favorites system
+- 🧪 Filter by Pokémon type
+- ✨ UI animations upgrade
+- 🌐 Backend integration (user data / save system)
+- 📲 PWA support
+
+---
+
+## 👨‍💻 Author
+
+Mohamed Brohani  
+Frontend Developer in training 🚀
+
+---
+
+## 📄 License
+
+This project is open source and free to use.
